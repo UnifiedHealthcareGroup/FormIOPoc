@@ -1,0 +1,10 @@
+F:\FormIOPoc\FormAPITest\bin\Debug\FormAPITest.exe.config
+F:\FormIOPoc\FormAPITest\bin\Debug\FormAPITest.exe
+F:\FormIOPoc\FormAPITest\bin\Debug\FormAPITest.pdb
+F:\FormIOPoc\FormAPITest\bin\Debug\Newtonsoft.Json.dll
+F:\FormIOPoc\FormAPITest\bin\Debug\Newtonsoft.Json.xml
+F:\FormIOPoc\FormAPITest\obj\Debug\FormAPITest.csprojResolveAssemblyReference.cache
+F:\FormIOPoc\FormAPITest\obj\Debug\FormAPITest.exe
+F:\FormIOPoc\FormAPITest\obj\Debug\FormAPITest.pdb
+F:\FormIOPoc\FormAPITest\bin\Debug\RestSharp.dll
+F:\FormIOPoc\FormAPITest\bin\Debug\RestSharp.xml
