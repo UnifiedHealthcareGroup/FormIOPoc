@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+<head>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/example.js"></script>
+    <link rel="stylesheet" href="https://it0893.uhg.com.au/FormIOPoc/bower_components/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <style>
+        .typeahead-demo .custom-popup-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            background-color: #f9f9f9;
+        }
+
+            .typeahead-demo .custom-popup-wrapper > .message {
+                padding: 10px 20px;
+                border-bottom: 1px solid #ddd;
+                color: #868686;
+            }
+
+            .typeahead-demo .custom-popup-wrapper > .dropdown-menu {
+                position: static;
+                float: none;
+                display: block;
+                min-width: 160px;
+                background-color: transparent;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+    </style>
+  
+    <div class='container-fluid typeahead-demo' ng-controller="TypeaheadCtrl">
+      
+        <h4>Results from SNOMED</h4>
+        
+        <input type="text" ng-model="asyncSelected" placeholder="Please type some thing" uib-typeahead="medicalConditions.fullySpecifiedName for medicalConditions in getMedicalConditions($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+        <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+﻿<html>
+<head>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-formio/css/formio.css" />
+    <!-- endbower -->
+    <style>
+        table, th, td {
+            border: solid 1px #CCC;
+            padding: 1px 3px;
+            font: 15px Verdana;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script src="bower_components/signature_pad/signature_pad.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="bower_components/blob-polyfill/Blob.js"></script>
+    <script src="bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/ng-formio/dist/formio.js"></script>
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Licence Vehicle Class</th>
+                <th>licence Number</th>
+                <th>Examination Date</th>
+                <th>Outcomee</th>
+            </tr>
+            <tr ng-repeat="sumissions in submissionArray">
+
+                <td>{{sumissions.values.lastName}}</td>
+                <td>{{sumissions.values.dateofBirth | date : 'dd/MM/yyyy'}}</td>
+                <td>{{sumissions.values.licenceVehicleClass}}</td>
+                <td>{{sumissions.values.licenceNumber}}</td>
+                <td>{{sumissions.values.examinationDate | date : 'dd/MM/yyyy'}}</td>
+                <td>{{sumissions.values.determination}}</td>
+            </tr>
+        </table>
+        <input type="button" title="Load submission data only for test patient" value="Load submission data for test patient" id="loadData" ng-click='loadSomeData()'>
+    </div>
+    <!--<input type="button" title="Load submission data for test patient" value="Load submission data for test patient" id="loadData">-->
+    <!-- endbower -->
+<script type="text/javascript">
+    var token;
+    $(document).ready(function () {
+       
+
+        $("#loadData").click(function (e) {
+            ////Load all forms submmision
+            //   var form = new FormData();
+
+            var submittionSettings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://uhg.form.io/emawizard/submission",
+                "method": "GET",
+                "headers": {
+                    "x-jwt-token": token,
+                    "content-type": "application/json"
+                },
+                "processData": false,
+                "contentType": false,
+                "mimeType": "multipart/form-data",
+                //"data": form
+            }
+
+            $.ajax(submittionSettings).done(function (response) {
+                console.log(JSON.stringify(response));
+            });
+
+          
+        });
+    });
+    function getSetting() {
+
+        return  {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://uhg.form.io/emawizard/submission",
+            "method": "GET",
+            "headers": {
+                "x-jwt-token": token,
+                "content-type": "application/json"
+            },
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            //"data": form
+        }
+    }
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $http) {
+        //Get and set Token
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://formio.form.io/user/login",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "processData": false,
+            "data": "{\n    \"data\": {\n        \"email\": \"arpan.saxena@uhg.com.au\",\n        \"password\": \"password\"\n    }\n}"
+        }
+
+        $.ajax(settings).done(function (res, status, xhr) {
+            token = xhr.getResponseHeader("x-jwt-token");
+            console.log(token);
+            var setting = getSetting();
+            $http(setting)
+                .then(function(response) {
+                    $scope.submisstionList = response.data;
+                    $scope.submissionArray = Object.keys($scope.submisstionList)
+                        .map(function (value, index) {
+                                return { modifiedDate: new Date($scope.submisstionList[value].modified), values: $scope.submisstionList[value].data }
+                            }
+                        );
+                });
+
+        });
+       
+        $scope.loadSomeData= function() {
+            var setting = getSetting();
+            setting.url = setting.url + '?data.lastName=a';
+            $http(setting)
+                .then(function (response) {
+                    $scope.submisstionList = response.data;
+                    $scope.submissionArray = Object.keys($scope.submisstionList)
+                        .map(function (value, index) {
+                            return { modifiedDate: new Date($scope.submisstionList[value].modified), values: $scope.submisstionList[value].data }
+                        }
+                        );
+                });
+        }
+    });
+
+
+</script>
+</body>
+</html>
+<script type="text/javascript">
+
+
+</script>

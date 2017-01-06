@@ -1,0 +1,12 @@
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\bin\FormIOPoc.dll.config
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\bin\FormIOPoc.dll
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\bin\FormIOPoc.pdb
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.dll
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.pdb
+F:\arpan\AngularJS\FormIOPOC\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.csprojResolveAssemblyReference.cache
+F:\FormIOPoc\FormIOPoc\bin\FormIOPoc.dll.config
+F:\FormIOPoc\FormIOPoc\bin\FormIOPoc.dll
+F:\FormIOPoc\FormIOPoc\bin\FormIOPoc.pdb
+F:\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.csprojResolveAssemblyReference.cache
+F:\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.dll
+F:\FormIOPoc\FormIOPoc\obj\Debug\FormIOPoc.pdb

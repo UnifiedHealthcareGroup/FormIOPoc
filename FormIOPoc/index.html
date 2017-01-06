@@ -1,0 +1,108 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- bower:css -->
+    <link rel="stylesheet" href="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-ui-select/dist/select.css"/>
+    <link rel="stylesheet" href="https://it0893.uhg.com.au/FormIOPoc/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="https://it0893.uhg.com.au/FormIOPoc/bower_components/ng-formio/css/formio.css"/>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/jquery/dist/jquery.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular/angular.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/moment/moment.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-moment/angular-moment.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/signature_pad/signature_pad.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/blob-polyfill/Blob.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/ng-formio/dist/formio.js"></script>
+    <!-- endbower -->
+</head>
+<body >
+<!-- bower:js -->
+
+<!-- endbower -->
+
+<script type="text/javascript">
+    angular.module('formioForm', ['formio'])
+        .run([
+            "$rootScope",
+            'formioComponents',
+            '$timeout',
+            function(
+                $rootScope,
+                formioComponents,
+                $timeout
+            ) {
+                //$rootScope.displays = [{
+                //    name: 'form',
+                //    title: 'Form'
+                //}, {
+                //    name: 'wizard',
+                //    title: 'Wizard'
+                //}];
+                //$rootScope.renderForm = true;
+                $rootScope.$on('formSubmission', function (event, form) {
+                    var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "https://it0893.uhg.com.au/CustomerAPI/api/Driver",
+                        "method": "POST",
+                        "headers": {
+                            "content-type": "application/json"
+                        },
+                        "processData": false,
+                        "data": "{\"FirstName\": \"Test\",\"LastName\": \"Test\",\"LicenceNumber\": null,\"DateOfBirth\": \"2017-01-06T11:56:35.4597565+11:00\",\"LicenceExpireDateTime\": null}"
+                    }
+                    $.ajax(settings)
+                        .done(function (res, status, xhr) {
+                            if (status === 'success') {
+                                angular.element($("#form-group-formSumiitedMessage")).text('Form sumiited to api successfully');
+                            }
+                        });
+
+                });
+                $rootScope.$on('searchForDriverButtonClick',
+                    function(event, arg) {
+                        console.log(arg); // prints 'baz'
+                        $.ajax({
+                            type: "GET",
+                            url: "https://it0893.uhg.com.au/CustomerAPI/api/Driver",
+                            data: {
+                                firstName: angular.element($("#driverFirstNames")).val(),
+                                lastName: angular.element($("#driverLastName1")).val(),
+                                licenceNumber: angular.element($("#licenceNumber1")).val(),
+                                dateOfBirth: angular.element($("#dateofBirth")).val(),
+                                licenceExpiryDate: angular.element($("#licenceExpiryDate")).val()
+                            },
+                            success: function(result) {
+                                if (result)
+                                    angular.element($("#form-group-validDriverMessage"))
+                                        .text('Driver is valid with details:' + JSON.stringify(result));
+                                else {
+                                    angular.element($("#form-group-validDriverMessage")).text('Driver is invalid:');
+                                }
+                            },
+                            error: function(result) {
+                                angular.element($("#form-group-validDriverMessage"))
+                                    .text('Driver is invalid with details:' + JSON.stringify(result));
+                            }
+                        });
+                    });
+
+
+            }
+        ]);
+
+
+</script>
+    <div ng-app="formioForm">
+        <formio src="'https://uhg.form.io/ema'"></formio>
+    </div>
+</body>
+</html>

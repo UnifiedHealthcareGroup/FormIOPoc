@@ -1,0 +1,18 @@
+{
+  "name": "bower.json",
+  "description": "bower json",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ng-formio": "^2.6.9",
+    "jquery": "^3.1.1"
+  }
+}

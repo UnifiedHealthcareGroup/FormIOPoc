@@ -1,0 +1,55 @@
+﻿<html>
+<head>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-formio/css/formio.css" />
+    <!-- endbower -->
+</head>
+<body ng-app="formioForm">
+    <formio src="'https://uhg.form.io/ema'" submission="defaultData"></formio>
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script src="bower_components/signature_pad/signature_pad.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="bower_components/blob-polyfill/Blob.js"></script>
+    <script src="bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/ng-formio/dist/formio.js"></script>
+    <!-- endbower -->
+    <script type="text/javascript">
+    angular.module('formioForm', ['formio'])
+          .run([
+      "$rootScope",
+      'formioComponents',
+      '$timeout',
+      function (
+        $rootScope,
+        formioComponents,
+        $timeout
+      ) {
+        $rootScope.defaultData= {
+            data:
+            {
+                driverFirstNames: "test",
+                driverLastName1: "test",
+                dateofBirth:"2016-12-03T13:00:00.000Z"
+            }
+        }
+
+
+      }
+          ]);
+
+    </script>
+</body>
+</html>

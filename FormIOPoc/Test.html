@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- bower:css -->
+    <link rel="stylesheet" href="https://it0893.uhg.com.au/FormIOPoc/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <script src="https://it0893.uhg.com.au/FormIOPoc/bower_components/jquery/dist/jquery.js"></script>
+    
+    <script type="text/javascript">
+        
+        var jsarr = ["https://it0893.uhg.com.au/FormIOPoc/bower_components/angular/angular.js"];
+
+        function getScripts(scripts, callback) {
+            var progress = 0;
+            scripts.forEach(function (script) {
+                $.getScript(script, function () {
+                    if (++progress == scripts.length) callback();
+                });
+            });
+        }
+        getScripts(jsarr, function () {
+             angular.module('HelloWorldApp', [])
+          .controller('HelloWorldController', function ($scope) {
+              $scope.greeting = "Hello World";
+          });});
+    </script>
+    <!-- endbower -->
+</head>
+<body>
+    <!-- bower:js -->
+    <!-- endbower -->
+
+
+<div ng-app="HelloWorldApp">
+    <div ng-controller="HelloWorldController">
+        <h1>{{greeting}}</h1>
+    </div>
+</div>
+  
+</body>
+</html>
